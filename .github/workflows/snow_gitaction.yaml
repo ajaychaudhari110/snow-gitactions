@@ -1,1 +1,31 @@
+name: deploy
+on: [push]
 
+jobs:
+  version:
+    name: "Check Snowflake CLI version"
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout step is necessary if you want to use a config file from your repo
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Check current folder path
+      - name: print current directory
+        run: |
+          echo $pwd
+          
+      # Snowflake CLI installation
+      - uses: snowflakedb/snowflake-cli-action@v1.5
+
+        # Use the CLI
+      - name: Execute Snowflake CLI command
+        env:
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        run: |
+          snow --help
+          snow connection test -x
