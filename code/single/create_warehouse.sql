@@ -10,4 +10,3 @@ BEGIN
 
   EXECUTE IMMEDIATE :sql_stmt;
 END;
-  '
