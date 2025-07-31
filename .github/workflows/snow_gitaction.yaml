@@ -28,3 +28,4 @@ jobs:
           SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
         run: |
           snow stage copy $GITHUB_WORKSPACE @dq_tutorial_db.sch.my_stage --overwrite --recursive -x
+          snow sql -q "EXECUTE IMMEDIATE FROM @dq_tutorial_db.sch.my_stage/deploy/warehouse/dev_wh.sql" -x
