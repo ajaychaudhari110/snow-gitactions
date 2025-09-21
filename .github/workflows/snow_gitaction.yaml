@@ -30,7 +30,8 @@ jobs:
       - name: Print GitHub OIDC token
         run: |
           TOKEN=$(snow auth oidc read-token --type=github)
-          echo "OIDC Token: $TOKEN"
+          echo $TOKEN > oidc_token.txt
+          cat oidc_token.txt
           
       # Use the CLI
       - name: Execute Snowflake CLI command
