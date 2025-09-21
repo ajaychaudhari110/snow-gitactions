@@ -26,8 +26,13 @@ jobs:
         with:
           cli-version: '3.11.0'   # pick latest stable
           use-oidc: true
+
+      - name: Print GitHub OIDC token
+        run: |
+          TOKEN=$(snow auth oidc read-token --type=github)
+          echo "OIDC Token: $TOKEN"
           
-        # Use the CLI
+      # Use the CLI
       - name: Execute Snowflake CLI command
         env: 
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }} 
