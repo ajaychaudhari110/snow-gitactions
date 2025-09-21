@@ -26,14 +26,6 @@ jobs:
         with:
           cli-version: '3.11.0'   # pick latest stable
           use-oidc: true
-
-      - name: Print GitHub OIDC token
-        run: |
-          TOKEN=$(snow auth oidc read-token --type=github)
-          echo $TOKEN > oidc_token.txt
-          cat oidc_token.txt
-          PAYLOAD=$(echo $TOKEN | cut -d '.' -f2 | base64 --decode | jq)
-          echo "Decoded payload: $PAYLOAD"
           
       # Use the CLI
       - name: Execute Snowflake CLI command
