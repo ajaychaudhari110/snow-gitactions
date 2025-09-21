@@ -32,6 +32,7 @@ jobs:
         env:
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_AUTHENTICATOR: OAUTH
         run: |
           snow stage copy $GITHUB_WORKSPACE @dq_tutorial_db.sch.my_stage --overwrite --recursive -x
           snow sql -q "EXECUTE IMMEDIATE FROM @dq_tutorial_db.sch.my_stage/deploy/warehouse/dev_wh.sql" -x
