@@ -22,7 +22,7 @@ jobs:
           ls $GITHUB_WORKSPACE/
           
       # Snowflake CLI installation
-      - uses: snowflakedb/snowflake-cli-action@v2
+      - uses: snowflakedb/snowflake-cli-action@v2.0
         with:
           cli-version: '3.11.0'   # pick latest stable
           use-oidc: true
