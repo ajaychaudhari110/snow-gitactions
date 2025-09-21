@@ -31,7 +31,8 @@ jobs:
       - name: Execute Snowflake CLI command
         env: 
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }} 
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}  
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_TOKEN: $(snow auth oidc read-token --type=github)
         run: |
           snow stage copy $GITHUB_WORKSPACE @dq_tutorial_db.sch.my_stage --overwrite --recursive -x
           snow sql -q "EXECUTE IMMEDIATE FROM @dq_tutorial_db.sch.my_stage/deploy/warehouse/dev_wh.sql" -x
