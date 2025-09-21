@@ -4,6 +4,7 @@ on: [push]
 permissions:
   id-token: write   # Needed for OIDC
   contents: read
+
   
 jobs:
   version:
