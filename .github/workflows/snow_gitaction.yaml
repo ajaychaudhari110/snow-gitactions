@@ -28,7 +28,7 @@ jobs:
           cli-version: '3.11.0'   # pick latest stable
           use-oidc: true
           snowflake-account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          snowflake-user: ${{ secrets.SNOWFLAKE_USER }}
+          snowflake-user: svc_git_wif
           snowflake-role: ACCOUNTADMIN
           snowflake-authenticator: WORKLOAD_IDENTITY
           workload-identity-provider: OIDC
