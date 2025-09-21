@@ -27,14 +27,14 @@ jobs:
         with:
           cli-version: '3.11.0'   # pick latest stable
           use-oidc: true
+          snowflake-account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          snowflake-user: ${{ secrets.SNOWFLAKE_USER }}
+          snowflake-role: ACCOUNTADMIN
+          snowflake-authenticator: WORKLOAD_IDENTITY
+          workload-identity-provider: OIDC
           
         # Use the CLI
       - name: Execute Snowflake CLI command
-        env:
-          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_AUTHENTICATOR: WORKLOAD_IDENTITY
-          WORKLOAD_IDENTITY_PROVIDER: OIDC
         run: |
           snow stage copy $GITHUB_WORKSPACE @dq_tutorial_db.sch.my_stage --overwrite --recursive -x
           snow sql -q "EXECUTE IMMEDIATE FROM @dq_tutorial_db.sch.my_stage/deploy/warehouse/dev_wh.sql" -x
