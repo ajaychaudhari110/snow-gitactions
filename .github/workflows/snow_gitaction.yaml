@@ -4,7 +4,6 @@ on: [push]
 permissions:
   id-token: write   # Needed for OIDC
   contents: read
-
   
 jobs:
   version:
@@ -30,8 +29,6 @@ jobs:
           snowflake-account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           snowflake-user: svc_git_wif
           snowflake-role: ACCOUNTADMIN
-          snowflake-authenticator: WORKLOAD_IDENTITY
-          workload-identity-provider: OIDC
           
         # Use the CLI
       - name: Execute Snowflake CLI command
